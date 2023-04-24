@@ -33,6 +33,8 @@ document.addEventListener('keydown', (e)=>{
         player.speedX = 0;
         player.speedY = 0;
     })
+
+    
 }
 
 
