@@ -1,0 +1,13 @@
+#game-board {
+    padding: 100px 280px;
+}
+
+button {
+    font-size: 30px;
+    background-color: red;
+}
+
+body {
+    text-align: center;
+    background-color: aquamarine;
+}
