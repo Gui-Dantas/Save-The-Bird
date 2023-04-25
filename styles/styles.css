@@ -1,13 +1,24 @@
 #game-board {
-    padding: 100px 280px;
+    padding: 50px 280px;
+}
+
+canvas{
+    border: 5px solid black;
 }
 
 button {
     font-size: 30px;
     background-color: red;
+    
 }
 
 body {
     text-align: center;
-    background-color: aquamarine;
+    background-image: url("");
+}
+
+h1{
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    
 }

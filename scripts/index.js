@@ -8,14 +8,17 @@ const ctx = canvas.getContext("2d")
 // Start Button
 const startButton = document.getElementById('start');
 
+// Creat the Bird
+const bird = new Bird(40, 10, 100, 100, ctx);
+
 // Creat the player
-const player = new Player(400, 350, 75, 75, ctx);
+const player = new Player(400, 350, 85, 85, ctx);
 
 // Start Button on Click
 let startFlag = false;
 startButton.onclick = function(){
     if(startFlag === false){
-    const game = new Game(ctx, canvas.width, canvas.height, player);
+    const game = new Game(ctx, canvas.width, canvas.height, player, bird);
     game.start();
 
     
@@ -26,6 +29,9 @@ startButton.onclick = function(){
                 break;
             case 'ArrowRight':
                 player.speedX += 1;
+                break;
+            case 'Space':
+               game.shooting()
                 break;
         }
     });

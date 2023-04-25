@@ -1,13 +1,15 @@
 class Game{
-    constructor(ctx, width, height, player){
+    constructor(ctx, width, height, player, bird){
         this.ctx = ctx;
         this.width = width;
         this.height = height;
         this.player = player;
+        this.bird = bird;
         this.intervalId = null;
         this.frames = 0;
         this.enemies = [];
         this.arrows = [];
+        this.score = 0;
         
         
         //Background Image
@@ -25,11 +27,17 @@ class Game{
     update = () => {
         this.frames++;
         this.clear();
-        this.player.newPost();
+        this.player.newPos();
         this.player.draw();
+        this.bird.newPos()
+        this.bird.draw()
         this.updateEnemies();
-        this.shooting();
         this.updateArrows();
+        this.checkBird();
+        this.checkGameOver();
+
+        console.log(this.arrows.length)
+        
     }
     //Stops The Game
     stop(){
@@ -62,23 +70,60 @@ class Game{
     
     // Shooting
     shooting(){
-        document.addEventListener('keydown', (e)=>{
-            switch(e.code){
-                case 'Space':{
+ 
                     let x = this.player.x + (this.player.w/2)-25;
                     let y = this.player.y + (this.player.h / 2)-50;
                     
                     this.arrows.push(new Enemy(x, y, 50, 50, false, this.ctx));
-                }
-            }
-        })
+
     }
-        
+    
+    // Updating the Player Arrows
     updateArrows(){
         for (let i = 0; i < this.arrows.length; i++) {
             this.arrows[i].y -= 3;
             this.arrows[i].newPos();
             this.arrows[i].draw();
+
+            if (this.arrows[i].y < 0){
+                this.arrows.splice(i, 1)
+            }
+    
+
+    // Check for collision with Enemies
+        for (let j = 0; j < this.enemies.length; j++) {
+            if (this.arrows[i].crashWith(this.enemies[j])) {
+                this.arrows.splice(i, 1);
+                this.enemies.splice(j, 1);
+                }
+            }
+        }
+    }
+
+    checkBird(){
+            // Check for collision between bird and enemies
+            for (let j = 0; j < this.enemies.length; j++) {    
+                if (this.bird.crashWith(this.enemies[j])) {
+                   console.log("bird hit")
+                   this.stop()
+                    }
+            }
+    }
+
+    checkGameOver(){
+        const crashed = this.enemies.some((enemy)=>{
+            return this.bird.crashWith(enemy);
+        })
+        if(crashed){
+            ctx.fillStyle = 'brown';
+            ctx.fillRect(50, 200, 400, 250);
+            ctx.font = '32px Helvetica';
+            ctx.fillStyle = 'red';
+            ctx.fillText('Game Over', 150, 300);
+            ctx.fillStyle = 'white';
+            ctx.fillText('Your final score', 135, 350);
+            this.ctx.fillText(`${this.score}`, 230, 400);
+            this.stop();
         }
     }
 }
