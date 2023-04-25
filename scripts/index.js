@@ -9,22 +9,22 @@ const ctx = canvas.getContext("2d")
 const startButton = document.getElementById('start');
 
 // Creat the player
-const player = new Component(0, 200, 75, 75, 'blue', ctx);
+const player = new Player(0, 200, 75, 75, ctx);
 
 // Start Button on Click
 startButton.onclick = function(){
     const game = new Game(ctx, canvas.width, canvas.height, player);
     game.start();
 
-// Move the player  
-document.addEventListener('keydown', (e)=>{
-    switch (e.code){
-        case 'ArrowLeft':
-            player.speedX -= 1;
-            break;
-        case 'ArrowRight':
-            player.speedX += 1;
-            break;
+    
+    document.addEventListener('keydown', (e)=>{
+        switch (e.code){
+            case 'ArrowLeft':
+                player.speedX -= 1;
+                break;
+            case 'ArrowRight':
+                player.speedX += 1;
+                break;
         }
     });
     
@@ -33,8 +33,6 @@ document.addEventListener('keydown', (e)=>{
         player.speedX = 0;
         player.speedY = 0;
     })
-
-    
 }
 
 
