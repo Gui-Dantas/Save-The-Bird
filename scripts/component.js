@@ -1,7 +1,7 @@
 // Player (Bow)
 class Player{
     constructor(x, y, w, h, ctx){
-        this.x = x;
+        this.x = x; // 0
         this.y = y;
         this.w = w;
         this.h = h;
@@ -16,12 +16,12 @@ class Player{
     }
 
     draw(){
-        this.ctx.drawImage(this.img, (this.x+400), (this.y+150), this.w, this.h);
+        this.ctx.drawImage(this.img, (this.x), (this.y), this.w, this.h);
     }
 
     newPost(){
         this.x += this.speedX;
-        this.y += this.speedY
+        this.y += this.speedY;
     }
 
     top(){
@@ -41,16 +41,18 @@ class Player{
     }
 }
 
-//ENEMIES
+//Enemies
 class Enemy {
-    constructor(x, y, w, h, ctx) {
+    constructor(x, y, w, h, enemy, ctx) {
       this.x = x;
       this.y = y;
       this.w = w;
       this.h = h;
+      this.enemy = enemy; 
       this.ctx = ctx;
       this.speedX = 0;
       this.speedY = 0;
+      this.arrows = [];
       
       //Enemie Image
       const arrowImage = new Image();
@@ -63,8 +65,13 @@ class Enemy {
     }
   
     newPos() {
+      if(this.enemy === true){
       this.x = this.speedX;
       this.y = this.speedY;
+      } else {
+        this.x = this.x;
+        this.y = this.y;
+      }
     }
 
     top() {

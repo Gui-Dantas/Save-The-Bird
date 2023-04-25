@@ -7,6 +7,9 @@ class Game{
         this.intervalId = null;
         this.frames = 0;
         this.enemies = [];
+        this.arrows = [];
+        
+        
         //Background Image
         const desertImg = new Image();
         desertImg.src="../images/jungle.jpg"
@@ -25,10 +28,13 @@ class Game{
         this.player.newPost();
         this.player.draw();
         this.updateEnemies();
+        this.shooting();
+        this.updateArrows();
     }
     //Stops The Game
     stop(){
         clearInterval(this.intervalId);
+        startFlag = false;
     }
     //Clears Canvas with Background Image
     clear(){
@@ -43,17 +49,36 @@ class Game{
     }
     if (this.frames % 200 === 0){
         let x = 1200;
-        let minHeight = 10;// at least 2px of min Height
-        let maxHeight = 10;// max height of 2px
+        let minHeight = 10;// at least 10px of min Height
+        let maxHeight = 10;// max height of 10px
             
         let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
         let randomY = Math.floor(Math.random() * 110);
             
     // Top Obstacles
-        this.enemies.push(new Enemy(x, randomY, 80, height, this.ctx));    
+        this.enemies.push(new Enemy(x, randomY, 80, height, true, this.ctx));    
         }
     }
     
-    
-}
+    // Shooting
+    shooting(){
+        document.addEventListener('keydown', (e)=>{
+            switch(e.code){
+                case 'Space':{
+                    let x = this.player.x + (this.player.w/2)-25;
+                    let y = this.player.y + (this.player.h / 2)-50;
+                    
+                    this.arrows.push(new Enemy(x, y, 50, 50, false, this.ctx));
+                }
+            }
+        })
+    }
         
+    updateArrows(){
+        for (let i = 0; i < this.arrows.length; i++) {
+            this.arrows[i].y -= 3;
+            this.arrows[i].newPos();
+            this.arrows[i].draw();
+        }
+    }
+}
