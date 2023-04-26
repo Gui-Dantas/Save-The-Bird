@@ -1,3 +1,4 @@
+
 class Game {
   constructor(ctx, width, height, player, bird) {
     this.ctx = ctx;
@@ -8,6 +9,7 @@ class Game {
     this.intervalId = null;
     this.frames = 0;
     this.enemies = [];
+    this.speedEnemy = 0;
     this.arrows = [];
     this.score = 0;
 
@@ -51,6 +53,10 @@ class Game {
 
   // Updates Enemies
   updateEnemies() {
+    if(this.frames % 200 === 0){
+        this.speedEnemy -= 2;
+    }
+    
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].x -= 6; // Enemy goes More to the Right
       this.enemies[i].draw(); // Continue to Draw Enemy
@@ -66,10 +72,8 @@ class Game {
       let randomY = Math.floor(Math.random() * 110);
 
       // Top Obstacles
-      this.enemies.push(
-        new Enemy(x, randomY, 80, height, true, this.ctx, "../images/enemyArrow.png")
-      );
-    }
+      this.enemies.push(new Enemy(x, randomY, 80, height, true, this.ctx, "../images/enemyArrow.png", this.speedEnemy));
+        }
   }
 
   // Shooting
@@ -119,15 +123,15 @@ class Game {
       return this.bird.crashWith(enemy);
     });
     if (crashed) {
-      ctx.fillStyle = "brown";
-      ctx.fillRect(250, 100, 400, 250);
-      ctx.font = "32px Arial";
-      ctx.fillStyle = "red";
-      ctx.fillText("Game Over", 365, 160);
-      ctx.fillStyle = "white";
-      ctx.fillText("Your final score:", 335, 230);
-      this.ctx.fillText(`${this.score}`, 433, 300);
-      this.stop();
+        ctx.fillStyle = "brown"  
+        ctx.fillRect(250, 100, 400, 250, [40]);
+        ctx.font = "32px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText("Game Over", 365, 160);
+        ctx.fillStyle = "white";
+        ctx.fillText("Your final score:", 335, 230);
+        this.ctx.fillText(`${this.score}`, 433, 300);
+        this.stop();
     }
   }
 }
