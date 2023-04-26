@@ -7,7 +7,6 @@ class Player {
     this.h = h;
     this.ctx = ctx;
     this.speedX = 0;
-    this.speedY = 0;
 
     // Player Image
     const bowImage = new Image();
@@ -60,7 +59,7 @@ class Enemy {
 
     //Enemie Image
     const arrowImage = new Image();
-    arrowImage.src = img
+    arrowImage.src = img;
     this.img = arrowImage;
   }
 
@@ -124,6 +123,7 @@ class Bird {
 
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+
   }
 
   newPos() {
@@ -152,11 +152,13 @@ class Bird {
   }
 
   left() {
-    return this.x;
+    return this.x + 90;
   }
 
   right() {
-    return this.x + this.w;
+    let bX = this.x + 90;
+    let bW = this.w - 95;
+    return bX + bW;
   }
 
   crashWith(enemies) {
