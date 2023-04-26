@@ -3,22 +3,24 @@
 }
 
 canvas{
-    border: 5px solid black;
+    border: 7px solid black;
 }
 
 button {
     font-size: 30px;
-    background-color: red;
+    background-color: brown;
+    color: whitesmoke;
     
 }
 
 body {
     text-align: center;
-    background-image: url("");
+    background-image: url("../images//background.jpg");
 }
 
 h1{
     font-size: 40px;
     font-family: 'Courier New', Courier, monospace;
+    color: whitesmoke;
     
 }
