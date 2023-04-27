@@ -153,9 +153,9 @@ class Game {
   }
 
   drawScore() {
-    ctx.font = "18px Arial";
+    ctx.font = "35px ArcadeClassic";
     ctx.fillStyle = "white";
-    ctx.fillText(`score: ${this.score}`, 800, 485);
+    ctx.fillText(`SCORE: ${this.score}`, 750, 485);
   }
 
   checkGameOver() {
@@ -166,16 +166,16 @@ class Game {
       this.killSound.play();
       ctx.fillStyle = "brown";
       ctx.fillRect(250, 100, 400, 250);
-      ctx.font = "32px Arial";
+      ctx.font = "25px ArcadeClassic";
       ctx.fillStyle = "white";
       ctx.fillText("Game Over", 365, 160);
       ctx.fillStyle = "white";
-      ctx.fillText(`Your final score: ${this.score}`, 335, 230);
+      ctx.fillText(`Your  final Score: ${this.score}`, 335, 230);
       if (this.score > highScore) {
         highScore = this.score;
       }
       localStorage.setItem("gameHighScore", highScore);
-      this.ctx.fillText(`Your High Score: ${highScore}`, 335, 300);
+      this.ctx.fillText(`Your  High  Score: ${highScore}`, 335, 300);
       this.stop();
     }
   }
