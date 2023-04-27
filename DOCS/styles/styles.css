@@ -4,24 +4,24 @@
 
 canvas {
   border: 7px solid black;
-  background-image: url("/DOCS/Assets/images/jungle.jpg");
+  background-image: url("https://i.ibb.co/nkWYxyP/jungle.png");
   background-size: 100% 100%;
 }
 
 button {
   font-size: 50px;
-  font-family:'ArcadeClassic', sans-serif;
+  font-family: "ArcadeClassic", sans-serif;
   background-color: brown;
-  color: whitesmoke
+  color: whitesmoke;
 }
 
 body {
   text-align: center;
-  background-image: url("/DOCS/Assets/images/background.jpg");
+  background-image: url("https://i.ibb.co/q5WhyJp/background.jpg");
 }
 
 h1 {
   font-size: 60px;
-  font-family: 'ArcadeClassic', sans-serif;
+  font-family: "ArcadeClassic", sans-serif;
   color: whitesmoke;
 }
