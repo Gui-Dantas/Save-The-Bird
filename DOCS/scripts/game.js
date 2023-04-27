@@ -15,23 +15,23 @@ class Game {
     this.score = 0;
 
     // Arrow Cracking
-    this.arrowCrack = new Audio("../sounds/arrowCrack.mp3");
+    this.arrowCrack = new Audio("/DOCS/Assets/sounds/arrowCrack.mp3");
     this.arrowCrack.loop = false;
 
     // Jungle Background Sound
-    this.jungleSound = new Audio("../sounds/backgroundSound.mp3");
+    this.jungleSound = new Audio("/DOCS/Assets/sounds/backgroundSound.mp3");
     this.jungleSound.loop = false;
 
     // Bird Kill Sound
-    this.killSound = new Audio("../sounds/killSound.mp3");
+    this.killSound = new Audio("/DOCS/Assets/sounds/killSound.mp3");
     this.killSound.loop = false;
     // Arrow Sound
-    this.arrowSound = new Audio("../sounds/arrowSound.mp3");
+    this.arrowSound = new Audio("/DOCS/Assets/sounds/arrowSound.mp3");
     this.arrowSound.loop = false;
 
     //Background Image
     const desertImg = new Image();
-    desertImg.src = "../images/jungle.jpg";
+    desertImg.src = "/DOCS/Assets/images/jungle.jpg";
     this.img = desertImg;
   }
 
@@ -101,7 +101,7 @@ class Game {
           height,
           true,
           this.ctx,
-          "../images/enemyArrow.png",
+          "/DOCS/Assets/images/enemyArrow.png",
           this.speedEnemy
         )
       );
@@ -114,7 +114,7 @@ class Game {
     let y = this.player.y + this.player.h / 2 - 50;
 
     this.arrows.push(
-      new Enemy(x, y, 10, 50, false, this.ctx, "../images/arrow.png")
+      new Enemy(x, y, 10, 50, false, this.ctx, "/DOCS/Assets/images/arrow.png")
     );
     this.arrowSound.play();
   }

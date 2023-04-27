@@ -10,7 +10,7 @@ class Player {
 
     // Player Image
     const bowImage = new Image();
-    bowImage.src = "../images/bow.png";
+    bowImage.src = "/DOCS/Assets/images/bow.png";
     this.img = bowImage;
   }
 
@@ -115,7 +115,7 @@ class Bird {
 
     // Bird Image
     const birdImage = new Image();
-    birdImage.src = "../images/bird.png";
+    birdImage.src = "/DOCS/Assets/images/bird.png";
     this.img = birdImage;
 
     this.maxTravel = false;

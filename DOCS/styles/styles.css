@@ -4,7 +4,7 @@
 
 canvas {
   border: 7px solid black;
-  background-image: url("../images/jungle.jpg");
+  background-image: url("/DOCS/Assets/images/jungle.jpg");
   background-size: 100% 100%;
 }
 
@@ -16,7 +16,7 @@ button {
 
 body {
   text-align: center;
-  background-image: url("../images//background.jpg");
+  background-image: url("/DOCS/Assets/images/background.jpg");
 }
 
 h1 {
