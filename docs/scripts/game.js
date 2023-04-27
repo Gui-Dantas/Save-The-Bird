@@ -20,7 +20,6 @@ class Game {
 
     // Jungle Background Sound
     this.jungleSound = new Audio("docs/assets/sounds/backgroundSound.mp3");
-    this.jungleSound.loop = false;
 
     // Bird Kill Sound
     this.killSound = new Audio("docs/assets/sounds/killSound.mp3");
