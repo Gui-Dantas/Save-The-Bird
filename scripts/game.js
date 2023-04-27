@@ -1,3 +1,5 @@
+let highScore = localStorage.getItem("gameHighScore") || 0;
+
 class Game {
   constructor(ctx, width, height, player, bird) {
     this.ctx = ctx;
@@ -11,6 +13,10 @@ class Game {
     this.speedEnemy = 0;
     this.arrows = [];
     this.score = 0;
+
+    // Arrow Cracking
+    this.arrowCrack = new Audio("../sounds/arrowCrack.mp3");
+    this.arrowCrack.loop = false;
 
     // Jungle Background Sound
     this.jungleSound = new Audio("../sounds/backgroundSound.mp3");
@@ -39,6 +45,7 @@ class Game {
   update = () => {
     this.frames++;
     this.clear();
+    this.drawScore();
     this.player.newPos();
     this.player.draw();
     this.bird.newPos();
@@ -66,15 +73,16 @@ class Game {
 
   // Updates Enemies
   updateEnemies() {
-    if(this.frames % 200 === 0){
-        this.speedEnemy -= 2;
+    if (this.frames % 200 === 0) {
+      this.speedEnemy -= 2;
     }
-    
+
     for (let i = 0; i < this.enemies.length; i++) {
       this.enemies[i].x -= 7; // Enemy goes More to the Right
       this.enemies[i].draw(); // Continue to Draw Enemy
     }
-    if (this.frames % 80 === 0) {// Speed of the enemies
+    if (this.frames % 60 === 0) {
+      // Speed of the enemies
       let x = 1200;
       let minHeight = 10; // at least 10px of min Height
       let maxHeight = 10; // max height of 10px
@@ -85,8 +93,19 @@ class Game {
       let randomY = Math.floor(Math.random() * 110);
 
       // Top Obstacles
-      this.enemies.push(new Enemy(x, randomY, 80, height, true, this.ctx, "../images/enemyArrow.png", this.speedEnemy));
-        }
+      this.enemies.push(
+        new Enemy(
+          x,
+          randomY,
+          80,
+          height,
+          true,
+          this.ctx,
+          "../images/enemyArrow.png",
+          this.speedEnemy
+        )
+      );
+    }
   }
 
   // Shooting
@@ -94,7 +113,6 @@ class Game {
     let x = this.player.x + this.player.w / 2 - 5;
     let y = this.player.y + this.player.h / 2 - 50;
 
-    
     this.arrows.push(
       new Enemy(x, y, 10, 50, false, this.ctx, "../images/arrow.png")
     );
@@ -117,7 +135,8 @@ class Game {
         if (this.arrows[i].crashWith(this.enemies[j])) {
           this.arrows.splice(i, 1);
           this.enemies.splice(j, 1);
-          this.score += 1
+          this.score += 1;
+          this.arrowCrack.play();
         }
       }
     }
@@ -133,22 +152,31 @@ class Game {
     }
   }
 
+  drawScore() {
+    ctx.font = "18px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText(`score: ${this.score}`, 800, 485);
+  }
+
   checkGameOver() {
     const crashed = this.enemies.some((enemy) => {
       return this.bird.crashWith(enemy);
     });
     if (crashed) {
-        this.killSound.play();
-        ctx.fillStyle = "brown"  
-        ctx.fillRect(250, 100, 400, 250, [40]);
-        ctx.font = "32px Arial";
-        ctx.fillStyle = "white";
-        ctx.fillText("Game Over", 365, 160);
-        ctx.fillStyle = "white";
-        ctx.fillText("Your final score:", 335, 230);
-        this.ctx.fillText(`${this.score}`, 433, 300);
-        this.stop();
-        
+      this.killSound.play();
+      ctx.fillStyle = "brown";
+      ctx.fillRect(250, 100, 400, 250);
+      ctx.font = "32px Arial";
+      ctx.fillStyle = "white";
+      ctx.fillText("Game Over", 365, 160);
+      ctx.fillStyle = "white";
+      ctx.fillText(`Your final score: ${this.score}`, 335, 230);
+      if (this.score > highScore) {
+        highScore = this.score;
+      }
+      localStorage.setItem("gameHighScore", highScore);
+      this.ctx.fillText(`Your High Score: ${highScore}`, 335, 300);
+      this.stop();
     }
   }
 }

@@ -1,27 +1,26 @@
 #game-board {
-    padding: 50px 280px;
+  padding: 50px 280px;
 }
 
-canvas{
-    border: 7px solid black;
-    background-image: url("") ;
+canvas {
+  border: 7px solid black;
+  background-image: url("../images/jungle.jpg");
+  background-size: 100% 100%;
 }
 
 button {
-    font-size: 30px;
-    background-color: brown;
-    color: whitesmoke;
-    
+  font-size: 30px;
+  background-color: brown;
+  color: whitesmoke;
 }
 
 body {
-    text-align: center;
-    background-image: url("../images//background.jpg");
+  text-align: center;
+  background-image: url("../images//background.jpg");
 }
 
-h1{
-    font-size: 40px;
-    font-family: 'Courier New', Courier, monospace;
-    color: whitesmoke;
-    
+h1 {
+  font-size: 40px;
+  font-family: "Courier New", Courier, monospace;
+  color: whitesmoke;
 }

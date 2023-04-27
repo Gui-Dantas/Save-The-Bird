@@ -14,6 +14,7 @@ const bird = new Bird(40, 10, 100, 100, ctx);
 // Creat the player
 let player = new Player(400, 350, 85, 85, ctx);
 let game = new Game(ctx, canvas.width, canvas.height, player, bird);
+
 // Arrow delay
 let arrowDelay = false;
 
