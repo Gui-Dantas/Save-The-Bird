@@ -161,13 +161,14 @@ class Game {
     const crashed = this.enemies.some((enemy) => {
       return this.bird.crashWith(enemy);
     });
+
+      const gameOverImg = new Image();
+      gameOverImg.src="docs/assets/images/GameOverBackground.png"
+    
     if (crashed) {
       this.killSound.play();
-      ctx.fillStyle = "brown";
-      ctx.fillRect(250, 100, 400, 250);
       ctx.font = "25px ArcadeClassic";
-      ctx.fillStyle = "white";
-      ctx.fillText("Game Over", 365, 160);
+      this.ctx.drawImage(gameOverImg, 295, 100, 300, 230);
       ctx.fillStyle = "white";
       ctx.fillText(`Your  final Score: ${this.score}`, 335, 230);
       if (this.score > highScore) {
@@ -175,7 +176,7 @@ class Game {
       }
       localStorage.setItem("gameHighScore", highScore);
       this.ctx.fillText(`Your  High  Score: ${highScore}`, 335, 300);
-      this.stop();
+       this.stop();
     }
   }
 }
